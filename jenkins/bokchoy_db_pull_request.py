@@ -1,3 +1,8 @@
+"""
+This script is to be run inside a Jenkins job after updating bokchoy
+db cache files through paver commands on edx-platform. If changes have
+been made, this script will generate a PR into master with the updates.
+"""
 import sys
 import logging
 import os
@@ -33,7 +38,7 @@ def _authenticate_with_github(github_token):
     except:
         raise StandardError(
             "Failed connecting to Github. " +
-            "Please make sure the credentials are accurate and try again."
+            "Please make sure the github token is accurate and try again."
         )
     return github_instance
 
