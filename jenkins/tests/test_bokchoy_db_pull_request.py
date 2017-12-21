@@ -5,9 +5,9 @@ from click.testing import CliRunner
 from mock import patch, Mock
 
 from jenkins.bokchoy_db_pull_request import (_authenticate_with_github, _connect_to_repo,
-                                            _get_file_sha, _read_file_contents, _file_has_changed,
-                                            _create_branch, _update_file, _create_pull_request,
-                                            main)
+                                             _get_file_sha, _read_file_contents, _file_has_changed,
+                                             _create_branch, _update_file, _create_pull_request,
+                                             main)
 
 
 class BokchoyPullRequestTestCase(TestCase):
