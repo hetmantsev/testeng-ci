@@ -28,6 +28,21 @@ BOKCHOY_DB_FILES = [
 ]
 
 
+def _get_github_token():
+    """
+    Get the github token environment variable.
+    Returns the github_token.
+    """
+    try:
+        github_token = os.environ.get('GITHUB_TOKEN')
+    except:
+        raise StandardError(
+            "Could not find env variable GITHUB_TOKEN. "
+            "Please make sure the variable is set and try again."
+        )
+    return github_token
+
+
 def _authenticate_with_github(github_token):
     """
     Authenticate with Github using a token.
@@ -157,19 +172,15 @@ def _create_pull_request(repository, title, body, base, head):
     required=True,
 )
 @click.option(
-    '--github_token',
-    help="Github token for authentication",
-    required=True,
-)
-@click.option(
     '--repo_root',
     help="Path to local edx-platform repository that will "
          "hold updated database files",
     required=True,
 )
-def main(sha, github_token, repo_root):
+def main(sha, repo_root):
     # Connect to github
     logger.info("Authenticating with Github")
+    github_token = _get_github_token()
     github_instance = _authenticate_with_github(github_token)
     repository = _connect_to_repo(github_instance, "edx-platform")
 
